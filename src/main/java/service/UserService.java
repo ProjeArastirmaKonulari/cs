@@ -8,7 +8,7 @@ package service;
 import dao.MachineDao;
 import dao.myClientDao;
 import modele.Machine;
-import modele.myClient;
+import modele.Client;
 import util.JpaUtil;
 
 /**
@@ -22,7 +22,7 @@ public class UserService {
         myClientDao = new myClientDao();
         machineDao = new MachineDao();
     }
-    public void inscriptionClient(myClient c){
+    public void inscriptionClient(Client c){
         //Persister le nouveau client
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
@@ -36,6 +36,19 @@ public class UserService {
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         machineDao.create(m);
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+    }
+    public void addMachineToClient(Machine m, Long clientId){
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+
+        machineDao.create(m);
+        
+        Client c= myClientDao.findById(clientId);
+        c.addMachine(m);
+        myClientDao.persist(c);
+        
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
         

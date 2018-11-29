@@ -6,7 +6,7 @@
 package dao;
 
 import javax.persistence.EntityManager;
-import modele.myClient;
+import modele.Client;
 import util.JpaUtil;
 
 /**
@@ -14,9 +14,31 @@ import util.JpaUtil;
  * @author Atadam
  */
 public class myClientDao {
-    public void create(myClient c){
+    public void create(Client c){
         EntityManager em= JpaUtil.obtenirEntityManager();
         em.persist(c);
        
     }
+    
+    public Client findById(Long id){
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        return em.find(Client.class, id);
+    }
+    public void persist(Client cl){
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        em.persist(cl);
+    }
+    public void merge(Client cl){
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        em.merge(cl);
+    }
+    public void refresh(Client cl){
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        em.refresh(cl);
+    }
+    public void remove(Client cl){
+        EntityManager em = JpaUtil.obtenirEntityManager();
+        em.remove(cl);
+    }
+    
 }

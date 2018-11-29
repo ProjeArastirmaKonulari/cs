@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author Atadam
  */
 @Entity
-public class Propertyy implements Serializable {
+public class Property implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,13 +26,12 @@ public class Propertyy implements Serializable {
     int minute;
     int voltage;
 
-    public Propertyy(String type,  int minute,int voltage) {
+    public Property(String type,  int minute,int voltage) {
         this.type = type;
         this.minute = minute;
         this.voltage = voltage;
     }
-    public Propertyy() {
-    }
+    public Property() {    }
 
     
     

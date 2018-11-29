@@ -8,13 +8,8 @@ package ihm;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import modele.Machine;
-import modele.Propertyy;
-import modele.myClient;
+import modele.Client;
 import service.UserService;
 import util.JpaUtil;
 
@@ -30,9 +25,9 @@ public class Main {
         SimpleDateFormat sf= new SimpleDateFormat ("dd/MM/YYYY");
         sf.parse("28/07/1996");
         Date date = new Date("28/07/1996"); 
-        myClient client = new myClient("Mustafa","COREKCI",new Date(),"Bagcilar","5347909837","a","1");
-        userService.inscriptionClient(client);
+        Client client = new Client("Mustafa","COREKCI",new Date(),"Bagcilar","5347909837","a","1");
         
+        userService.inscriptionClient(client);
         
         Machine machine=new Machine("camasirMakinem","arcelik","2015 model");
 //        Propertyy p= new Property();
@@ -41,8 +36,9 @@ public class Main {
         }else{
             System.out.println("Adding property is NOT OK");
         }
-        userService.newMachine(machine);
+        userService.addMachineToClient(machine,client.getId());
         
+
         JpaUtil.destroy();
    
 

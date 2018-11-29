@@ -27,21 +27,21 @@ public class Machine implements Serializable {
     String description;
     String mark;
     String model;
-    List<Propertyy> propertyList; //{pamuk,45, 2200}
+    List<Property> propertyList; //{pamuk,45, 2200}
 
     
     public Machine(String description, String mark, String model) {
         this.description = description;
         this.mark = mark;
         this.model = model;
-        this.propertyList= new ArrayList<>();;
+        this.propertyList= new ArrayList<>();
     }
     public Machine() {
     }
     
     public boolean addProperty(String type,int minute,int voltage){
         try{
-            Propertyy p = new Propertyy (type,minute,voltage);
+            Property p = new Property (type,minute,voltage);
             System.out.println("Adding property is OK1");
             
             this.getPropertyList().add(p);
@@ -55,7 +55,7 @@ public class Machine implements Serializable {
         }
         
     }
-    public boolean addProperty(Propertyy p){
+    public boolean addProperty(Property p){
         try{
             this.propertyList.add(p);
             return true;
@@ -99,11 +99,11 @@ public class Machine implements Serializable {
         this.model = model;
     }
 
-    public List<Propertyy> getPropertyList() {
+    public List<Property> getPropertyList() {
         return propertyList;
     }
 
-    public void setPropertyList(List<Propertyy> propertyList) {
+    public void setPropertyList(List<Property> propertyList) {
         this.propertyList = propertyList;
     }
 

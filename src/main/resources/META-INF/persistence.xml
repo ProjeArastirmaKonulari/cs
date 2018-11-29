@@ -4,7 +4,8 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modele.myClient</class>
     <class>modele.Machine</class>
-    <class>modele.Propertyy</class>
+    <class>modele.Client</class>
+    <class>modele.Property</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/camasir"/>
       <property name="javax.persistence.jdbc.user" value="camasir"/>
