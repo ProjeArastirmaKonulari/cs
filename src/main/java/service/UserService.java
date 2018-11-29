@@ -6,7 +6,7 @@
 package service;
 
 import dao.MachineDao;
-import dao.myClientDao;
+import dao.ClientDao;
 import modele.Machine;
 import modele.Client;
 import util.JpaUtil;
@@ -16,10 +16,10 @@ import util.JpaUtil;
  * @author Atadam
  */
 public class UserService {
-    private myClientDao myClientDao;
+    private ClientDao myClientDao;
     private MachineDao machineDao;
     public UserService() {
-        myClientDao = new myClientDao();
+        myClientDao = new ClientDao();
         machineDao = new MachineDao();
     }
     public void inscriptionClient(Client c){

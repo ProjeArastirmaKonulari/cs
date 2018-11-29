@@ -13,7 +13,7 @@ import util.JpaUtil;
  *
  * @author Atadam
  */
-public class myClientDao {
+public class ClientDao {
     public void create(Client c){
         EntityManager em= JpaUtil.obtenirEntityManager();
         em.persist(c);
