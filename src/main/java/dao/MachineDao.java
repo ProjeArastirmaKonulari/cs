@@ -16,9 +16,9 @@ import util.JpaUtil;
 public class MachineDao {
     public void create(Machine m){
         EntityManager em= JpaUtil.obtenirEntityManager();
-//        while(m.getPropertyList()!=null){
-            em.persist(m.getPropertyList().get(0));
-  //      }
+        for(int i=0;i<m.getPropertyList().size();i++){
+            em.persist(m.getPropertyList().get(i));
+        }
         em.persist(m);
     }
 

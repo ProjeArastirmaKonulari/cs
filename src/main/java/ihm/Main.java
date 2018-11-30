@@ -10,6 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import modele.Machine;
 import modele.Client;
+import modele.DryingMachine;
+import modele.IroningMachine;
+import modele.LoundryMachine;
 import service.UserService;
 import util.JpaUtil;
 
@@ -29,14 +32,18 @@ public class Main {
         
         userService.inscriptionClient(client);
         
-        Machine machine=new Machine("camasirMakinem","arcelik","2015 model");
-//        Propertyy p= new Property();
-        if(        machine.addProperty("pamuk",45,1200)){
-            System.out.println("Adding property is OK");
-        }else{
-            System.out.println("Adding property is NOT OK");
-        }
-        userService.addMachineToClient(machine,client.getId());
+        LoundryMachine lmachine=new LoundryMachine("camasirMakinem","arcelik","2015 model",5);
+        lmachine.addProperty("pamuk",45,1200);
+        lmachine.addProperty("on_yikama",20,1000);
+        userService.addMachineToClient(lmachine,client.getId());
+
+        DryingMachine dmachine=new DryingMachine("kurutmaMakinem","arcelik","2014 model",5);
+        dmachine.addProperty("genel",35,1700);
+        userService.addMachineToClient(dmachine,client.getId());
+
+        IroningMachine imachine=new IroningMachine("utuMakinem","beko","2018 model");
+        imachine.addProperty("pamuk",10,400);
+        userService.addMachineToClient(imachine,client.getId());
         
 
         JpaUtil.destroy();
