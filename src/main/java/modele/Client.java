@@ -36,6 +36,7 @@ public class Client implements Serializable {
     private String telNumber;
     private String mail;
     private String password; 
+    private int mandal;
     private List<Machine> machineList;
 //    private List<Service> serviceList;
 //    private List<Announcement> announceList;
@@ -49,6 +50,7 @@ public class Client implements Serializable {
         this.mail = mail;
         this.password = password;
         this.machineList = new ArrayList<>();
+        this.mandal=50;
     }
     public Client(){       }
     
@@ -62,7 +64,8 @@ public class Client implements Serializable {
             return false;
         }
     }
-
+    
+    
     public Long getId() {
         return id;
     }
@@ -134,5 +137,19 @@ public class Client implements Serializable {
     public void setMachineList(List<Machine> machineList) {
         this.machineList = machineList;
     }
+
+    public int getMandal() {
+        return mandal;
+    }
+
+    public void addMandal(int mandal) {
+        this.mandal += mandal;
+    }
+
+    public void removeMandal(int mandal) {
+        this.mandal -= mandal;
+    }
+    
+    
     
 }

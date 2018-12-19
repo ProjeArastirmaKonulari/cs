@@ -5,9 +5,11 @@
  */
 package ihm;
 
+import dao.ClientDao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import modele.Announcement;
 import modele.Machine;
 import modele.Client;
 import modele.DryingMachine;
@@ -45,24 +47,20 @@ public class Main {
         imachine.addProperty("pamuk",10,400);
         userService.addMachineToClient(imachine,client.getId());
         
-
+        
+        
+        Announcement a = new Announcement(client.getId(),"Üsküdarda ucuza yikama",
+                " 50 mandal değerine arçelik çamaşır+yıkama(her özellik mevcuttur.)",50) ;
+        Machine mtemp=userService.getMachineByDescription(client.getId(),"camasirMakinem");        
+        a.addMachine(mtemp);
+        
+        userService.publishAnnouncement(a);
+        
+//        userService.addMachineToAnnouncement(mtemp, a.getId());
         JpaUtil.destroy();
    
 
-        /*
-        myClient client = new myClient("Mustafa","COREKCI",new Date(),"Esenler","5347909837","a","1");
-         
-        EntityManagerFactory emf= Persistence.createEntityManagerFactory("cspun") ;
-        EntityManager em= emf.createEntityManager();
-        EntityTransaction trx=em.getTransaction();
-        
-        trx.begin();
-        em.persist(client);
-        trx.commit();
-        
-        em.close();
-        emf.close();
-        */
+       
     }
 
 }

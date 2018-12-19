@@ -16,12 +16,11 @@ import util.JpaUtil;
 public class ClientDao {
     public void create(Client c){
         EntityManager em= JpaUtil.obtenirEntityManager();
-        em.persist(c);
-       
-    }
-    
+        em.persist(c);  
+    }    
     public Client findById(Long id){
         EntityManager em = JpaUtil.obtenirEntityManager();
+        System.out.println("YYYYY "+id);
         return em.find(Client.class, id);
     }
     public void persist(Client cl){
