@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Machine implements Serializable {
     String description;
     String mark;
     String model;
+    @OneToMany
     List<Property> propertyList; //{pamuk,45, 2200}
 
     

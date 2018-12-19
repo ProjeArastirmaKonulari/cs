@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,16 +31,17 @@ public class Client implements Serializable {
 
     private String name;
     private String surname;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date birhtday;
     private String adress;
     private String telNumber;
     private String mail;
     private String password; 
     private int mandal;
+    @OneToMany
     private List<Machine> machineList;
-//    private List<Service> serviceList;
-//    private List<Announcement> announceList;
+    private List<Announcement> announcementList;
+    private List<Task> taskList;
 
     public Client (String name, String surname, Date birhtday, String adress, String telNumber, String mail, String password) {
         this.name = name;
@@ -50,6 +52,8 @@ public class Client implements Serializable {
         this.mail = mail;
         this.password = password;
         this.machineList = new ArrayList<>();
+        this.announcementList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         this.mandal=50;
     }
     public Client(){       }
@@ -57,6 +61,27 @@ public class Client implements Serializable {
     public boolean addMachine(Machine m){
         try{
             this.machineList.add(m);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+    
+    public boolean addAnnoucement(Announcement a){
+        try{
+            this.announcementList.add(a);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+    public boolean addTask(Task t){
+        try{
+            this.taskList.add(t);
             return true;
         }
         catch (Exception e)

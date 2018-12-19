@@ -10,6 +10,7 @@
     <class>modele.DryingMachine</class>
     <class>modele.IroningMachine</class>
     <class>modele.Announcement</class>
+    <class>modele.Task</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/camasir"/>
       <property name="javax.persistence.jdbc.user" value="camasir"/>

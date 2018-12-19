@@ -8,10 +8,13 @@ package service;
 import dao.AnnouncementDao;
 import dao.MachineDao;
 import dao.ClientDao;
+import dao.TaskDao;
+import java.util.Date;
 import java.util.List;
 import modele.Announcement;
 import modele.Machine;
 import modele.Client;
+import modele.Task;
 import util.JpaUtil;
 
 /**
@@ -22,11 +25,13 @@ public class UserService {
     private ClientDao clientDao;
     private MachineDao machineDao;
     private AnnouncementDao announcementDao;
+    private TaskDao taskDao;
     
     public UserService() {
         clientDao = new ClientDao();
         machineDao = new MachineDao();
         announcementDao =  new AnnouncementDao();
+        taskDao = new TaskDao(); 
     }
     
     public void inscriptionClient(Client c){
@@ -44,9 +49,15 @@ public class UserService {
         JpaUtil.ouvrirTransaction();
         a.setVisibility(true);
         announcementDao.create(a);
+        
+        //add annoucement to client by getting clientID from annoucement itself.
+        Long cid= a.getClientID();
+        Client c = clientDao.findById(cid);
+        c.addAnnoucement(a);
+        clientDao.persist(c);
+        
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
-        
     }
     public void newMachine(Machine m){
         //Persister le nouveau client
@@ -92,7 +103,6 @@ public class UserService {
     public void addMachineToAnnouncement(Machine m, Long announcementId){
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
-
         
         Announcement a= announcementDao.findById(announcementId);
         a.addMachine(m);
@@ -100,6 +110,20 @@ public class UserService {
         
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
+    }
+    public void startTask(Announcement a, Long guestId){
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
         
+        Task t = new Task(a.getPrice(),new Date(),a.getClientID(),guestId,a.getId(),true);
+        taskDao.create(t);
+        Client c = clientDao.findById(t.getGuestId());
+        c.addTask(t);
+        clientDao.persist(c);
+        c=clientDao.findById(t.getHostId());
+        c.addTask(t);
+        clientDao.persist(c);
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
     }
 }

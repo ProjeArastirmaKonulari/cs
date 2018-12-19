@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -30,9 +31,10 @@ public class Announcement implements Serializable {
     private int price;
     private String location;//NEEDS TO BE GPS BUT HOW?
     private String adress;
-    private boolean visibility;
     private Long clientID;
+    @OneToMany
     private List<Machine> machineList;
+    private boolean visibility;
     
     public Announcement(Long clientID,String header, String description, int price) {
         this.clientID=clientID;
