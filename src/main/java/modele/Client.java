@@ -89,6 +89,12 @@ public class Client implements Serializable {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return name+" "+surname;
+    }
+    
     
     
     public Long getId() {

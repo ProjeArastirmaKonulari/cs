@@ -43,6 +43,24 @@ public class UserService {
         JpaUtil.fermerEntityManager();
         
     }
+    
+    public Client connectionClient(String mail,String password){
+        JpaUtil.creerEntityManager();
+        Client client = clientDao.findByMail(mail);
+        JpaUtil.fermerEntityManager();
+        if(client==null){
+            return null;
+        }
+        else {
+            if(client.getPassword().equals(password)){
+                return client;
+            }
+            else{
+                return null;
+            }
+        }
+    }
+    
     public void publishAnnouncement(Announcement a){
         //Persister le nouveau client
         JpaUtil.creerEntityManager();
