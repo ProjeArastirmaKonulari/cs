@@ -41,7 +41,7 @@ public class Main {
     public static void clientPage(UserService userService, Long clientId){
         Client client=userService.getClientById(clientId);
         Scanner reader = new Scanner(System.in);
-        System.out.println(""
+        System.out.println("\n"
                 + "1. İlanlarımı Görüntüle\n"
                 + "2. Makinelerimi Görüntüle\n"
                 + "3. İsteklerimi Görüntüle\n"
@@ -76,9 +76,9 @@ public class Main {
                 }
                 System.out.println("Ne yapmak istersiniz?\n");
                 System.out.println("\n"
-                        + "1. Makine Ekle\n"
-                        + "2. Makineye Özellik Ekle\n"
-                        + "0. Geri Dön\n");
+                        + "\t1. Makine Ekle\n"
+                        + "\t2. Makineye Özellik Ekle\n"
+                        + "\t0. Geri Dön\n");
                 int makinesecim=Integer.parseInt(reader.nextLine());
                 switch(makinesecim){
                     case 1:
@@ -90,26 +90,26 @@ public class Main {
                         int machineType = Integer.parseInt(reader.nextLine());  
                         switch(machineType){
                             case 1:
-                                System.out.println("Makine açıklamasını Giriniz: ");        
+                                System.out.print("Makine açıklamasını Giriniz:\t");        
                                 String  description=reader.nextLine();
-                                System.out.println("Makine Markasını Giriniz: ");
+                                System.out.print("Makine Markasını Giriniz:\t");
                                 String  mark=reader.nextLine();
-                                System.out.println("Makine Modelini Giriniz: ");        
+                                System.out.print("Makine Modelini Giriniz:\t");        
                                 String model=reader.nextLine();
-                                System.out.println("Makine kapasitesini Giriniz: ");
+                                System.out.print("Makine Kapasitesini Giriniz (kg cinsinden):\t");
                                 int capacity=Integer.parseInt(reader.nextLine());
                                 Machine lm=new LoundryMachine(description,mark,model,capacity);
                                 System.out.println("Makineye Özellik Eklemek ister misiniz?\n"
-                                        + "1. Evet"
+                                        + "1. Evet\t"
                                         + "0. Hayır");
                                 int yesno = Integer.parseInt(reader.nextLine());
                                 switch(yesno){
                                     case 1:
-                                        System.out.println("Programı Giriniz: ");        
+                                        System.out.print("Programı Giriniz:\t");        
                                         String  type=reader.nextLine();
-                                        System.out.println("Kaç Dakika Sürüyor: ");
+                                        System.out.print("Kaç Dakika Sürüyor:\t");
                                         int  minute=Integer.parseInt(reader.nextLine());
-                                        System.out.println("Voltajı nedir: ");        
+                                        System.out.print("Voltajı nedir:\t\t");        
                                         int voltage=Integer.parseInt(reader.nextLine());
                                         lm.addProperty(type, minute, voltage);
                                         break;
@@ -121,26 +121,26 @@ public class Main {
                                 
                                 break;
                             case 2:
-                                System.out.println("Makine açıklamasını Giriniz: ");        
+                                System.out.print("Makine açıklamasını Giriniz:\t");        
                                 description=reader.nextLine();
-                                System.out.println("Makine Markasını Giriniz: ");
+                                System.out.print("Makine Markasını Giriniz:\t");
                                 mark=reader.nextLine();
-                                System.out.println("Makine Modelini Giriniz: ");        
+                                System.out.print("Makine Modelini Giriniz:\t");        
                                 model=reader.nextLine();
-                                System.out.println("Makine kapasitesini Giriniz: ");
+                                System.out.print("Makine kapasitesini Giriniz:(kg cinsinden)\t");
                                 capacity=Integer.parseInt(reader.nextLine());
                                 Machine dm=new DryingMachine(description,mark,model,capacity);
                                 System.out.println("Makineye Özellik Eklemek ister misiniz?\n"
-                                        + "1. Evet"
+                                        + "1. Evet\t"
                                         + "0. Hayır");
                                 yesno = Integer.parseInt(reader.nextLine());
                                 switch(yesno){
                                     case 1:
-                                        System.out.println("Programı Giriniz: ");        
+                                        System.out.print("Programı Giriniz:\t");        
                                         String  type=reader.nextLine();
-                                        System.out.println("Kaç Dakika Sürüyor: ");
+                                        System.out.print("Kaç Dakika Sürüyor:\t");
                                         int  minute=Integer.parseInt(reader.nextLine());
-                                        System.out.println("Voltajı nedir: ");        
+                                        System.out.print("Voltajı nedir:\t\t");        
                                         int voltage=Integer.parseInt(reader.nextLine());
                                         dm.addProperty(type, minute, voltage);
                                         break;
@@ -151,24 +151,24 @@ public class Main {
                                 client=userService.getClientById(clientId);
                                 break;
                             case 3:
-                                System.out.println("Makine açıklamasını Giriniz: ");        
+                                System.out.print("Makine açıklamasını Giriniz:\t");        
                                 description=reader.nextLine();
-                                System.out.println("Makine Markasını Giriniz: ");
+                                System.out.print("Makine Markasını Giriniz:\t");
                                 mark=reader.nextLine();
-                                System.out.println("Makine Modelini Giriniz: ");        
+                                System.out.print("Makine Modelini Giriniz:\t");        
                                 model=reader.nextLine();
                                 Machine im=new IroningMachine(description,mark,model);
                                 System.out.println("Makineye Özellik Eklemek ister misiniz?\n"
-                                        + "1. Evet"
+                                        + "1. Evet\t"
                                         + "0. Hayır");
                                 yesno = Integer.parseInt(reader.nextLine());
                                 switch(yesno){
                                     case 1:
-                                        System.out.println("Programı Giriniz: ");        
+                                        System.out.print("Programı Giriniz:\t");        
                                         String  type=reader.nextLine();
-                                        System.out.println("Kaç Dakika Sürüyor: ");
+                                        System.out.print("Kaç Dakika Sürüyor:\t");
                                         int  minute=Integer.parseInt(reader.nextLine());
-                                        System.out.println("Voltajı nedir: ");        
+                                        System.out.print("Voltajı nedir:\t\t");        
                                         int voltage=Integer.parseInt(reader.nextLine());
                                         im.addProperty(type, minute, voltage);
                                         break;
@@ -224,7 +224,7 @@ public class Main {
         SimpleDateFormat sf= new SimpleDateFormat ("dd/MM/YYYY");
         Scanner reader = new Scanner(System.in);
         System.out.println("1. Giriş Yap\n"
-                + "2. Kayıt Ol"
+                + "2. Kayıt Ol\n"
                 + "0. Çıkış Yap");
         int menu = Integer.parseInt(reader.nextLine());
         String  password,mail;
@@ -236,7 +236,7 @@ public class Main {
                 password=reader.nextLine();
                 Client c=userService.connectionClient(mail, password);
                 if(c==null){
-                    System.out.println("Giriş işlemi reddedildi. Mail ya da şifre yanlış..!");
+                    System.out.println("\nGiriş işlemi reddedildi. Mail ya da şifre yanlış..!");
                     karsilamaSayfasi(userService);
                 }else{
                     System.out.println("Hoşgeldin "+c+" :)");
