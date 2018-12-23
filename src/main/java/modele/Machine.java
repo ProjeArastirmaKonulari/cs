@@ -67,6 +67,16 @@ public class Machine implements Serializable {
             return false;
         }        
     }
+
+    @Override
+    public String toString() {
+        String str=description + ", Özellikleri=";
+        for (int i=0;i<this.propertyList.size();i++){
+            str+=this.propertyList.get(i);
+        }
+        return str;
+    }
+    
     
     
     public Long getId() {

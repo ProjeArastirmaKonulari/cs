@@ -46,6 +46,14 @@ public class Task implements Serializable {
         this.visibility = visibility;
     }
 
+    @Override
+    public String toString() {
+        return "Fiyatı " + cost + " olan hizmetiniz, " + startTime + 
+                " tarihinde başlamış olup, " + endTime + " tarihinde bitmiştir.";
+    }
+    
+    
+
     public int getCost() {
         return cost;
     }
@@ -94,14 +102,22 @@ public class Task implements Serializable {
         this.guestId = guestId;
     }
 
-    public boolean isVisibility() {
+    public boolean isVisibible() {
         return visibility;
     }
 
     public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
-    
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
     
 }

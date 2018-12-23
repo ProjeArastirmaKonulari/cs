@@ -43,17 +43,64 @@ public class UserService {
         JpaUtil.fermerEntityManager();
         
     }
+    public Client getClientById(Long id){
+        //Persister le nouveau client
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        Client c = clientDao.findById(id);
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return c;
+    }
+    public List<Announcement> getClientAnnouncements(Long id){
+        //Persister le nouveau client
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        List<Announcement> la=this.getClientById(id).getAnnouncementList();
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return la;
+    }
+    public List<Task> getClientTasks(Long id){
+        //Persister le nouveau client
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        List<Task> lt=this.getClientById(id).getTaskList();
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return lt;
+    }
+    
+    public Client connectionClient(String mail,String password){
+        JpaUtil.creerEntityManager();
+        Client client = clientDao.findByMail(mail);
+        JpaUtil.fermerEntityManager();
+        if(client==null){
+            return null;
+        }
+        else {
+            if(client.getPassword().equals(password)){
+                return client;
+            }
+            else{
+                return null;
+            }
+        }
+    }
+    
     public void publishAnnouncement(Announcement a){
         //Persister le nouveau client
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         a.setVisibility(true);
-        announcementDao.create(a);
         
         //add annoucement to client by getting clientID from annoucement itself.
-        Long cid= a.getClientID();
+        Long cid= a.getClientId();
         Client c = clientDao.findById(cid);
-        c.addAnnoucement(a);
+        a.setAddress(c.getAddress());
+        a.setLocation(c.getAddress());
+        c.addAnnouncement(a);
+        announcementDao.persist(a);
         clientDao.persist(c);
         
         JpaUtil.validerTransaction();
@@ -81,11 +128,23 @@ public class UserService {
         JpaUtil.fermerEntityManager();
         
     }
+    public int addMandalToClient(int mandal,Long clientId){
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        Client c= clientDao.findById(clientId);
+        c.addMandal(mandal);
+        clientDao.persist(c);
+        
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return c.getMandal();        
+    }
+    
     public Machine getMachineByDescription(Long clientId, String description){
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
 
-        System.out.println("XXX "+clientId);
         Client c= clientDao.findById(clientId);
         List<Machine> lm = c.getMachineList();
         for(int i=0;i<lm.size();i++){
@@ -111,11 +170,11 @@ public class UserService {
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
     }
-    public void startTask(Announcement a, Long guestId){
+    public Task startTask(Announcement a, Long guestId){
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         
-        Task t = new Task(a.getPrice(),new Date(),a.getClientID(),guestId,a.getId(),true);
+        Task t = new Task(a.getPrice(),new Date(),a.getClientId(),guestId,a.getId(),true);
         taskDao.create(t);
         Client c = clientDao.findById(t.getGuestId());
         c.addTask(t);
@@ -123,6 +182,16 @@ public class UserService {
         c=clientDao.findById(t.getHostId());
         c.addTask(t);
         clientDao.persist(c);
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return t;
+    }
+    public void endTask(Long taskId,Date date){
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        Task t = taskDao.findById(taskId);
+        t.setEndTime(date);
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
     }

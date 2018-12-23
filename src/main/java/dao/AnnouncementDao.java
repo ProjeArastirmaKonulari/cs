@@ -17,7 +17,7 @@ import util.JpaUtil;
 public class AnnouncementDao {
     public void create(Announcement a){
         EntityManager em= JpaUtil.obtenirEntityManager();
-        em.persist(a);  
+        em.persist(a);
     }    
     public Announcement findById(Long id){
         EntityManager em = JpaUtil.obtenirEntityManager();

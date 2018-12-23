@@ -33,7 +33,7 @@ public class Client implements Serializable {
     private String surname;
     @Temporal(TemporalType.TIMESTAMP)
     private Date birhtday;
-    private String adress;
+    private String address;
     private String telNumber;
     private String mail;
     private String password; 
@@ -43,11 +43,11 @@ public class Client implements Serializable {
     private List<Announcement> announcementList;
     private List<Task> taskList;
 
-    public Client (String name, String surname, Date birhtday, String adress, String telNumber, String mail, String password) {
+    public Client (String name, String surname, Date birhtday, String address, String telNumber, String mail, String password) {
         this.name = name;
         this.surname = surname;
         this.birhtday = birhtday;
-        this.adress = adress;
+        this.address = address;
         this.telNumber = telNumber;
         this.mail = mail;
         this.password = password;
@@ -69,7 +69,7 @@ public class Client implements Serializable {
         }
     }
     
-    public boolean addAnnoucement(Announcement a){
+    public boolean addAnnouncement(Announcement a){
         try{
             this.announcementList.add(a);
             return true;
@@ -89,6 +89,12 @@ public class Client implements Serializable {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return name+" "+surname;
+    }
+    
     
     
     public Long getId() {
@@ -123,12 +129,12 @@ public class Client implements Serializable {
         this.birhtday = birhtday;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTelNumber() {
@@ -163,6 +169,26 @@ public class Client implements Serializable {
         this.machineList = machineList;
     }
 
+    public List<Announcement> getAnnouncementList() {
+        return announcementList;
+    }
+    
+    
+
+    public void setAnnouncementList(List<Announcement> announcementList) {
+        this.announcementList = announcementList;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    
+    
     public int getMandal() {
         return mandal;
     }
