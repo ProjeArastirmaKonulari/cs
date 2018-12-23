@@ -30,14 +30,14 @@ public class Announcement implements Serializable {
     private String description;
     private int price;
     private String location;//NEEDS TO BE GPS BUT HOW?
-    private String adress;
-    private Long clientID;
+    private String address;
+    private Long clientId;
     @OneToMany
     private List<Machine> machineList;
     private boolean visibility;
     
-    public Announcement(Long clientID,String header, String description, int price) {
-        this.clientID=clientID;
+    public Announcement(Long clientId,String header, String description, int price) {
+        this.clientId=clientId;
         this.header = header;
         this.description = description;
         this.price = price;
@@ -46,8 +46,8 @@ public class Announcement implements Serializable {
         Client c = clientDao.findById( new Long(1) );
         if(c==null) System.out.println("XXXXXXXXXXXXXXXXXXXXxx null Client");
         else
-            this.location = (c).getAdress();
-/*        this.adress = cd.findById(clientID).getAdress();*/
+            this.location = (c).getAddress();
+/*        this.address = cd.findById(clientID).getAddress();*/
         this.visibility = true;
         this.machineList = new ArrayList<>();
 
@@ -65,6 +65,13 @@ public class Announcement implements Serializable {
             return false;
         }
     }    
+
+    @Override
+    public String toString() {
+        return "header=" + header;
+    }
+    
+    
     
     public Long getId() {
         return id;
@@ -107,12 +114,12 @@ public class Announcement implements Serializable {
         this.location = location;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean isVisibility() {
@@ -123,12 +130,12 @@ public class Announcement implements Serializable {
         this.visibility = visibility;
     }
 
-    public Long getClientID() {
-        return clientID;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClientID(Long clientID) {
-        this.clientID = clientID;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public List<Machine> getMachineIDList() {

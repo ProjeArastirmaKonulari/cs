@@ -46,6 +46,14 @@ public class Task implements Serializable {
         this.visibility = visibility;
     }
 
+    @Override
+    public String toString() {
+        return "Fiyatı " + cost + " olan hizmetiniz, " + startTime + 
+                " tarihinde başlamış olup, " + endTime + " tarihinde bitmiştir.";
+    }
+    
+    
+
     public int getCost() {
         return cost;
     }

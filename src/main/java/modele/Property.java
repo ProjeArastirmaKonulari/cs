@@ -33,6 +33,11 @@ public class Property implements Serializable {
     }
     public Property() {    }
 
+    @Override
+    public String toString() {
+        return type + "(" + minute + "dk),";
+    }
+
     
     
     public Long getId() {
