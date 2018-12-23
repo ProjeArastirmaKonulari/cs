@@ -170,7 +170,7 @@ public class UserService {
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
     }
-    public void startTask(Announcement a, Long guestId){
+    public Task startTask(Announcement a, Long guestId){
         JpaUtil.creerEntityManager();
         JpaUtil.ouvrirTransaction();
         
@@ -182,6 +182,16 @@ public class UserService {
         c=clientDao.findById(t.getHostId());
         c.addTask(t);
         clientDao.persist(c);
+        JpaUtil.validerTransaction();
+        JpaUtil.fermerEntityManager();
+        return t;
+    }
+    public void endTask(Long taskId,Date date){
+        JpaUtil.creerEntityManager();
+        JpaUtil.ouvrirTransaction();
+        
+        Task t = taskDao.findById(taskId);
+        t.setEndTime(date);
         JpaUtil.validerTransaction();
         JpaUtil.fermerEntityManager();
     }

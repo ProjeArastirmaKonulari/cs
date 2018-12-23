@@ -223,7 +223,9 @@ public class Main {
     public static void karsilamaSayfasi(UserService userService) throws ParseException{
         SimpleDateFormat sf= new SimpleDateFormat ("dd/MM/YYYY");
         Scanner reader = new Scanner(System.in);
-        System.out.println("1. Giriş Yap\n2. Kayıt Ol");
+        System.out.println("1. Giriş Yap\n"
+                + "2. Kayıt Ol"
+                + "0. Çıkış Yap");
         int menu = Integer.parseInt(reader.nextLine());
         String  password,mail;
         switch(menu){
@@ -261,12 +263,11 @@ public class Main {
                 karsilamaSayfasi(userService);
                 break;
             case 0:
-                karsilamaSayfasi(userService);
                 break;
         }
     }
     public static void initialize(UserService userService){
-
+        SimpleDateFormat sf= new SimpleDateFormat ("dd/MM/YYYY");
         Client client = new Client("Mustafa","COREKCI",new Date(),"Bagcilar","5347909837","a","1");       
         userService.inscriptionClient(client);
         Client client2 = new Client("Harun","DAG",new Date(),"Ortakoy","534790211","b","2");
@@ -294,7 +295,8 @@ public class Main {
         
         userService.publishAnnouncement(a);
         
-//        userService.startTask(a,client2.getId());
+        Task t = userService.startTask(a,client2.getId());
+        userService.endTask(t.getId(), new Date());
         
 //        userService.addMachineToAnnouncement(mtemp, a.getId());
         
