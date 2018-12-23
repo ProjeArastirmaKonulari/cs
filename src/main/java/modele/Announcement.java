@@ -74,7 +74,6 @@ public class Announcement implements Serializable {
         this.id = id;
     }
 
-    
     public String getHeader() {
         return header;
     }
